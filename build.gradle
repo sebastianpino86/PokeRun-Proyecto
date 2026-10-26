@@ -35,8 +35,8 @@ tasks.register('verificarEstructura') {
       include 'core/src/main/java/**/*.java'
       include 'lwjgl3/src/main/java/**/*.java'
     }
-    if (javaPropio.files.size() != 5)
-      throw new GradleException('Se requieren exactamente 5 tipos propios; encontrados: ' + javaPropio.files.size())
-    println 'PokéRun: 5 tipos propios de producción comprobados.'
+    if (javaPropio.files.size() != 13)
+      throw new GradleException('Se requieren exactamente 13 tipos propios; encontrados: ' + javaPropio.files.size())
+    println 'PokéRun: 13 tipos propios de producción comprobados.'
   }
 }
