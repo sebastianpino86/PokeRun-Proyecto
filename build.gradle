@@ -1,0 +1,42 @@
+allprojects {
+    apply plugin: 'eclipse'
+    version = '2.0.0'
+    repositories { mavenCentral() }
+    eclipse.project.natures 'org.eclipse.buildship.core.gradleprojectnature'
+    eclipse.project.file.withXml { xml ->
+        xml.asNode().linkedResources.link.each { link ->
+            if (link.name.text() == 'assets') {
+                link.remove(link.location)
+                link.appendNode('locationURI', 'PARENT-1-PROJECT_LOC/assets')
+            }
+        }
+    }
+}
+subprojects {
+    apply plugin: 'java-library'
+    java { sourceCompatibility = JavaVersion.VERSION_11; targetCompatibility = JavaVersion.VERSION_11 }
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release = 11
+    }
+    eclipse.project.name = 'GameLluviaMenu2024-' + project.name
+    eclipse.classpath {
+        containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
+        file.whenMerged { cp -> cp.entries.removeAll { it.kind == 'lib' || it.kind == 'var' } }
+    }
+}
+eclipse.project.name = 'GameLluviaMenu2024-parent'
+
+// Verifica el límite académico: cuenta las clases, interfaces y enums Java propios.
+tasks.register('verificarEstructura') {
+  dependsOn ':core:compileJava'
+  doLast {
+    def javaPropio = fileTree(projectDir) {
+      include 'core/src/main/java/**/*.java'
+      include 'lwjgl3/src/main/java/**/*.java'
+    }
+    if (javaPropio.files.size() != 5)
+      throw new GradleException('Se requieren exactamente 5 tipos propios; encontrados: ' + javaPropio.files.size())
+    println 'PokéRun: 5 tipos propios de producción comprobados.'
+  }
+}

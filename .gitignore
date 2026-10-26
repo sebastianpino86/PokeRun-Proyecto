@@ -1,0 +1,12 @@
+**/.gradle/
+**/build/
+**/bin/
+**/.settings/
+**/.metadata/
+*.class
+*.log
+*.tmp
+.idea/
+*.iml
+saves/
+captures/
