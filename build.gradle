@@ -29,14 +29,14 @@ eclipse.project.name = 'GameLluviaMenu2024-parent'
 
 // Verifica el límite académico: cuenta las clases, interfaces y enums Java propios.
 tasks.register('verificarEstructura') {
-  dependsOn ':core:compileJava'
+  dependsOn ':core:compileJava', ':lwjgl3:compileJava'
   doLast {
     def javaPropio = fileTree(projectDir) {
       include 'core/src/main/java/**/*.java'
       include 'lwjgl3/src/main/java/**/*.java'
     }
-    if (javaPropio.files.size() != 13)
-      throw new GradleException('Se requieren exactamente 13 tipos propios; encontrados: ' + javaPropio.files.size())
-    println 'PokéRun: 13 tipos propios de producción comprobados.'
+    if (javaPropio.files.size() != 25)
+      throw new GradleException('Se requieren exactamente 25 tipos propios; encontrados: ' + javaPropio.files.size())
+    println 'PokéRun: 25 tipos propios de producción comprobados.'
   }
 }

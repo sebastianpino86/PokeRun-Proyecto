@@ -1,1 +1,3 @@
-// En esta etapa el dominio solo utiliza la biblioteca estándar de Java.
+dependencies {
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
+}

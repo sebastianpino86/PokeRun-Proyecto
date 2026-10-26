@@ -1,2 +1,2 @@
 rootProject.name = 'GameLluviaMenu2024'
-include 'core'
+include 'core', 'lwjgl3'
