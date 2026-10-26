@@ -2,7 +2,7 @@
 
 **Integrantes:** Benjamín Alucema, Sebastian Pino y Vicente Ruiz.
 
-**Asignatura:** INF2236 — Programación Avanzada, PUCV.
+**Asignatura:** ICI2236 — Programación Avanzada, PUCV.
 
 **Profesor:** Leonardo González Catalán.
 
@@ -12,7 +12,7 @@
 
 PokéRun es un juego de escritorio en el que el jugador elige un Pokémon, esquiva ataques elementales, recoge objetos beneficiosos y dispara mientras avanza por distintas rutas. El proyecto aplica programación orientada a objetos y los patrones Singleton, Strategy, Template Method y Builder.
 
-Esta entrega contiene **25 tipos Java propios de producción**, contando clases, interfaces y enumeraciones. El nombre técnico de la carpeta del proyecto es `GameLluviaMenu2024`.
+Esta entrega contiene **25 Clases**. El nombre técnico de la carpeta del proyecto es `GameLluviaMenu2024`.
 
 ---
 
@@ -277,36 +277,9 @@ Como asignación de responsabilidades GRASP, `Jugador` y `Nivel` actúan como ex
 
 Los diagramas de estas relaciones están incluidos en el UML completo; el informe desarrolla su contexto y justificación.
 
----
 
-## 8. Persistencia y archivos generados
 
-| Archivo o carpeta | Función |
-| --- | --- |
-| `%LOCALAPPDATA%\PokeRun\perfil.properties` | Récords, victorias, desbloqueos y preferencias |
-| `%LOCALAPPDATA%\PokeRun\perfil.bak` | Copia del perfil anterior al guardado |
-| `%LOCALAPPDATA%\PokeRun\perfil.tmp` | Archivo temporal durante el guardado |
-| `%LOCALAPPDATA%\PokeRun\capturas\` | Capturas PNG realizadas con F12 |
-
-Si `LOCALAPPDATA` no está definido, se utiliza la carpeta personal del usuario como base. La propiedad Java `pokerun.saveDir` permite indicar otra carpeta de guardado.
-
-El perfil conserva progreso general, no una partida suspendida para reanudarla. El formato actual es la versión 2 y también permite leer perfiles de versión 1. Ante un error de lectura, se intenta recuperar la copia `perfil.bak`.
-
-Para empezar desde cero, cerrar el juego y mover el perfil y su copia a otra carpeta como respaldo. No es necesario borrar el proyecto.
-
----
-
-## 9. GitHub e historial — GM10
-
-**Repositorio de PokéRun: PENDIENTE DE AÑADIR LA URL REAL.**
-
-Las bases requieren publicar el proyecto en GitHub y mantener **al menos seis commits**. La entrega de un ZIP o un ejecutable no demuestra por sí sola este requisito.
-
-Antes de entregar, incorporar aquí el enlace correcto y comprobar en GitHub que el historial contiene al menos seis commits del proyecto. Deben incluirse el código, la configuración de Gradle, el Wrapper y los recursos necesarios para compilar. El enlace del README del proyecto anterior corresponde a otro trabajo y no se reutiliza como evidencia de PokéRun.
-
----
-
-## 10. Documentación y comprobación de entrega
+## 8. Documentación y comprobación de entrega
 
 | Requisito | Evidencia principal |
 | --- | --- |
@@ -321,21 +294,12 @@ Antes de entregar, incorporar aquí el enlace correcto y comprobar en GitHub que
 | GM9 — Builder | `AtaqueBuilder`, `ConstructorAtaque`, `DirectorAtaques` y `Ataque` |
 | GM10 — GitHub | URL real del repositorio e historial con seis commits como mínimo |
 
-### Lista de entrega según las bases
-
-- Proyecto fuente completo para importar y compilar, con recursos y dependencias declaradas.
-- Instrucciones de instalación y ejecución: este README.
-- Informe escrito que explique cómo y dónde se aborda cada GM, con evidencia del código y diagramas.
-- Ejecutable y cualquier archivo adicional necesario para utilizar el programa.
-- Repositorio GitHub con el historial requerido.
-- Coevaluación firmada por los integrantes, con tareas y aportes según las bases.
-- Preparación de la presentación de cinco minutos si es solicitada por el profesor.
 
 El README sirve como guía del proyecto y no sustituye el informe ni los demás documentos de evaluación.
 
 ---
 
-## 11. Problemas frecuentes
+## 9. Problemas frecuentes
 
 | Problema | Qué revisar |
 | --- | --- |
