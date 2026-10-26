@@ -2,7 +2,7 @@
 
 **Integrantes:** Benjamín Alucema, Sebastian Pino y Vicente Ruiz.
 
-**Asignatura:** ICI2236 — Programación Avanzada, PUCV.
+**Asignatura:** ICI2241 — Programación Avanzada, PUCV.
 
 **Profesor:** Leonardo González Catalán.
 
