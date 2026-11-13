@@ -122,6 +122,10 @@ public final class PantallaPartida extends ScreenAdapter {
         28,
         Lienzo.BLANCO,
         true);
+    l.centrado(
+        siguiente == 2 ? "Prismeon retrocede hacia el Bosque Prisma. ¡Síguelo!"
+            : "El Santuario Varitipo está cerca. Pikachu te espera.",
+        480, 501, 13, Lienzo.ORO, false);
     l.pokemon(inicial.getForma(siguiente - 1), 342, 366, 110, tiempo, Color.WHITE);
     l.texto(">", 472, 411, 35, Lienzo.MENTA, true);
     l.circulo(620, 415, 62, Lienzo.MENTA, .12f);
@@ -192,8 +196,11 @@ public final class PantallaPartida extends ScreenAdapter {
     boolean infinito=partida.esInfinito();
     l.rect(0,0,960,720,Color.BLACK,.72f);
     l.panel(175,97,610,533,Lienzo.PANEL);
-    l.centrado(victoria?"¡Santuario alcanzado!":infinito?"Fin de la resistencia":"La ruta continúa",480,589,31,Lienzo.BLANCO,true);
-    l.centrado(victoria?"Completaste las tres rutas de Prismeon.":"Busca ataques de tu tipo y vuelve a intentarlo.",480,541,15,Lienzo.SUAVE,false);
+    l.centrado(victoria?"¡Pikachu está a salvo!":infinito?"Fin de la resistencia":"La ruta continúa",480,589,31,Lienzo.BLANCO,true);
+    l.centrado(victoria?"Llegaste al santuario y superaste a Prismeon.":"Busca ataques de tu tipo y vuelve a intentarlo.",480,541,15,Lienzo.SUAVE,false);
+    if(victoria) l.centrado("Rescataste a Pikachu. ¡Ahora puede acompañarte!",480,512,14,Lienzo.MENTA,false);
+    else if(!infinito && !juego.getPerfil().tienePikachu())
+      l.centrado("Pikachu sigue esperando en el santuario.",480,512,14,Lienzo.ORO,false);
     l.circulo(480,455,60,Lienzo.ORO,.12f);
     l.pokemon(victoria?"pikachu":partida.getJugador().getForma(),480,411,124,tiempo,Color.WHITE);
     l.centrado(victoria?"PIKACHU + INFINITO":infinito?"RESISTISTE "+(int)partida.getTiempo()/60+"m "+(int)partida.getTiempo()%60+"s":"RUTA "+partida.getNivel().getNumero(),480,390,22,Lienzo.ORO,true);

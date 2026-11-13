@@ -8,11 +8,11 @@
 
 **Tecnologías:** Java 11, libGDX 1.12.1, backend LWJGL3 y Gradle Wrapper 8.10.1.
 
-**Entorno del equipo:** Eclipse 2020-06 y JDK instalado en `C:\Program Files\Java\jdk-11.0.32.1`.
+**Entorno de referencia:** Eclipse con integración Gradle (Buildship) y JDK 11.
 
 PokéRun es un juego de escritorio en el que el jugador elige un Pokémon, esquiva ataques elementales, recoge objetos beneficiosos y dispara mientras avanza por distintas rutas. El proyecto aplica programación orientada a objetos y los patrones Singleton, Strategy, Template Method y Builder.
 
-Esta entrega contiene **25 Clases**. El nombre técnico de la carpeta del proyecto es `GameLluviaMenu2024`.
+Esta entrega contiene **25 tipos Java propios** (clases, interfaces y enumeraciones). El nombre técnico en Eclipse puede aparecer como `GameLluviaMenu2024`, aunque la carpeta descargada se llame `PokeRun-Proyecto-main`.
 
 ---
 
@@ -29,6 +29,10 @@ El jugador comienza eligiendo entre Charmander, Squirtle y Bulbasaur. Debe conse
 | 3 | Santuario Varitipo | 1800 m |
 
 La campaña tiene una distancia total de 3250 metros de juego. Al superar las primeras rutas, el personaje evoluciona y obtiene nuevas habilidades. Completar la campaña desbloquea a Pikachu y el modo infinito, que registra su récord por separado. La partida termina en derrota si la salud llega a cero.
+
+### Narrativa dentro del juego
+
+Al seleccionar un Pokémon y comenzar la campaña aparece una pantalla de texto: Prismeon mantiene a Pikachu en el Santuario Varitipo y debemos atravesar las tres rutas para rescatarlo. Se puede continuar con Enter o volver al menú con Esc. Las pantallas de evolución recuerdan hacia dónde avanza la aventura; al ganar, el resultado cuenta que Pikachu quedó a salvo. Son textos dentro de las pantallas existentes, sin añadir clases ni cambiar las reglas. El modo infinito comienza normalmente, sin repetir esta introducción.
 
 ### Elementos y mecánicas
 
@@ -47,6 +51,7 @@ La campaña tiene una distancia total de 3250 metros de juego. Al superar las pr
 | --- | --- | --- |
 | Menú | Flechas izquierda/derecha o números | Elegir personaje disponible |
 | Menú | Enter | Iniciar |
+| Introducción de campaña | Enter / Esc | Continuar al tutorial / volver al menú |
 | Menú | I | Cambiar campaña/infinito cuando está desbloqueado |
 | Menú o pausa | O | Abrir ajustes |
 | Partida | A / D o flechas izquierda/derecha | Moverse |
@@ -76,6 +81,7 @@ El proyecto conserva el nombre `GameLluviaMenu2024` y parte de una mecánica de 
 | Combate | Disparos del jugador, rival, barrera y recompensas |
 | Habilidades | Dash, escudo y pasivas |
 | Interfaz | Menú, tutorial, pausa, ajustes y resultados |
+| Narrativa | Introducción en `PantallaMenu`, transición y rescate en `PantallaPartida` |
 | Guardado | Perfil local, récords y desbloqueos |
 | Diseño | Separación de dominio, presentación, persistencia y arranque |
 
@@ -93,8 +99,7 @@ La lógica de `Partida` se mantiene separada de las clases gráficas y de guarda
 | `core/src/main/java/puppy/code/persistence/` | Perfil y almacenamiento |
 | `lwjgl3/src/main/java/puppy/code/lwjgl3/` | Lanzador de escritorio |
 | `assets/` | Sprites, texturas, fuentes y audio |
-| `docs/` | Informe, inventario, relaciones y evidencias |
-| `docs/uml/` | Diagramas UML y fuentes editables |
+| `docs/` | Licencias y otros documentos que se adjunten a la entrega |
 | `docs/licenses/` | Información de licencias de recursos |
 | `gradle/wrapper/` | Configuración y archivos del Gradle Wrapper |
 | `build.gradle`, `settings.gradle`, `gradle.properties` | Configuración de compilación y módulos |
@@ -125,8 +130,8 @@ La lógica de `Partida` se mantiene separada de las clases gráficas y de guarda
 | `Tecnica` | Enumeración de técnicas |
 | `GestorPerfil` | Carga y guardado del perfil mediante Singleton |
 | `Lienzo` | Dibujo y gestión de recursos visuales |
-| `PantallaMenu` | Selección, inicio y opciones |
-| `PantallaPartida` | Entrada, presentación de partida y resultados |
+| `PantallaMenu` | Selección, introducción narrativa, inicio y opciones |
+| `PantallaPartida` | Entrada, evolución, rescate de Pikachu y resultados |
 | `Lwjgl3Launcher` | Punto de entrada de escritorio |
 
 ---
@@ -135,41 +140,42 @@ La lógica de `Partida` se mantiene separada de las clases gráficas y de guarda
 
 ### Requisitos
 
-- JDK 11; ruta utilizada por el equipo: `C:\Program Files\Java\jdk-11.0.32.1`.
-- Eclipse 2020-06 con integración Gradle (Buildship) para importar el proyecto.
+- JDK 11 instalado (puede estar en una carpeta diferente en cada computador).
+- Eclipse con integración Gradle (Buildship) para importar el proyecto.
 - Conexión a Internet en la primera compilación para descargar Gradle y dependencias.
 - Entorno de escritorio con soporte gráfico para LWJGL3.
 
 Gradle descarga las dependencias declaradas. No es necesario instalar libGDX por separado ni agregar sus JAR manualmente. El juego no requiere base de datos ni servidor.
 
-### Importar en Eclipse 2020-06
+### Importar y ejecutar en Eclipse
 
-1. Descomprimir `PokeRun_25_CORREGIDO_Entrega.zip`.
-2. Descomprimir también `PokeRun_25_CORREGIDO_Eclipse.zip` en una carpeta fija.
-3. Abrir Eclipse, preferentemente en un workspace limpio para evitar mezclar entregas.
-4. Entrar en **Window > Preferences > Java > Installed JREs**.
-5. Pulsar **Add > Standard VM** y seleccionar como **JRE home**:
-    
-    ```
-    C:\Program Files\Java\jdk-11.0.32.1
-    ```
-    
-6. Marcar este JDK como predeterminado. Aunque Eclipse llame a esta sección “Installed JREs”, se debe seleccionar la carpeta del JDK.
-7. Ir a **File > Import > Gradle > Existing Gradle Project**.
-8. Seleccionar `GameLluviaMenu2024`, la carpeta que contiene `settings.gradle` y `gradlew.bat`.
-9. Elegir **Gradle Wrapper**, configurar el Java home de Gradle con el mismo JDK 11 y desactivar el modo sin conexión para la primera importación.
-10. Finalizar y esperar la sincronización. Deben aparecer los módulos `core` y `lwjgl3`.
-11. Abrir **Gradle Tasks**, localizar el módulo `lwjgl3` y ejecutar **application > run**.
+1. Descargar el ZIP del repositorio y **extraerlo por completo** en una carpeta fija.
+2. Abrir Eclipse y entrar en **Window > Preferences > Java > Installed JREs**. Agregar el JDK 11 con **Add > Standard VM** si aún no aparece.
+3. Elegir ese JDK para el proyecto y, si Eclipse lo solicita, también como Java home de Gradle.
+4. Ir a **File > Import > Gradle > Existing Gradle Project**.
+5. Seleccionar **la carpeta que contiene `settings.gradle` y `gradlew.bat`** (normalmente `PokeRun-Proyecto-main`). No seleccionar `core`, `lwjgl3` ni el archivo ZIP.
+6. Elegir **Gradle Wrapper** y mantener habilitado el acceso a Internet en la primera importación.
+7. Esperar a que aparezcan los módulos `core` y `lwjgl3`. Si faltan dependencias, usar **Gradle > Refresh Gradle Project**.
+8. Abrir la vista **Gradle Tasks**; en `lwjgl3` ejecutar **application > run**. También se puede abrir `Lwjgl3Launcher.java` como aplicación Java, siempre que Eclipse haya sincronizado las dependencias y los recursos.
 
 La versión de Buildship instalada influye en la importación. Si Eclipse no sincroniza el Wrapper, se puede compilar y ejecutar desde CMD con los comandos siguientes. La importación en el equipo concreto debe comprobarse antes de entregar.
 
-### Ejecutar desde CMD con el JDK indicado
+### Ejecutar desde PowerShell (recomendado)
 
-Abrir **CMD** en la raíz `GameLluviaMenu2024`. Los siguientes comandos usan sintaxis de CMD, no de PowerShell:
+Abrir PowerShell en la carpeta que contiene `gradlew.bat` y escribir:
+
+```powershell
+java -version
+.\gradlew.bat :lwjgl3:run --console=plain
+```
+
+El primer comando sirve para comprobar Java; si utiliza un JDK distinto del configurado en Eclipse, revisar `JAVA_HOME` y la configuración del IDE.
+
+### Ejecutar desde CMD
+
+Abrir CMD en esa misma carpeta:
 
 ```bash
-set "JAVA_HOME=C:\Program Files\Java\jdk-11.0.32.1"
-set "PATH=%JAVA_HOME%\bin;%PATH%"
 java -version
 javac -version
 gradlew.bat --version
@@ -180,10 +186,10 @@ Las versiones de Java y del compilador deben corresponder a Java 11. La tarea `r
 
 ### Compilar y generar un ejecutable
 
-Desde esa misma ventana de CMD:
+Desde esa misma carpeta, en PowerShell (en CMD, escribe `gradlew.bat` sin el prefijo `./` o `\.\`):
 
 ```bash
-gradlew.bat clean build :lwjgl3:dist --console=plain
+.\gradlew.bat clean build :lwjgl3:dist --console=plain
 ```
 
 La tarea `dist` reúne el programa, los recursos y las dependencias en:
@@ -195,18 +201,14 @@ lwjgl3\build\libs\PokeRun.jar
 Para ejecutarlo:
 
 ```bash
-"C:\Program Files\Java\jdk-11.0.32.1\bin\java.exe" -jar lwjgl3\build\libs\PokeRun.jar
+java -jar lwjgl3\build\libs\PokeRun.jar
 ```
 
-### Ejecutar el JAR incluido en la entrega
+El ZIP del repositorio contiene **código fuente**, no un JAR previamente construido. El JAR se genera con `:lwjgl3:dist`. El punto de entrada es `puppy.code.lwjgl3.Lwjgl3Launcher`.
 
-Desde la carpeta que contiene `PokeRun_25_CORREGIDO.jar`:
+### Si Eclipse muestra imports sin resolver
 
-```bash
-"C:\Program Files\Java\jdk-11.0.32.1\bin\java.exe" -jar PokeRun_25_CORREGIDO.jar
-```
-
-El JAR incluido y el generado con `dist` tienen nombres diferentes. El punto de entrada de ambos es `puppy.code.lwjgl3.Lwjgl3Launcher`.
+El `build.gradle` original eliminaba las entradas `lib` y `var` del classpath de Eclipse. Se quitó únicamente esa instrucción para conservar las bibliotecas de libGDX. Tras actualizar el repositorio, importar como proyecto Gradle y ejecutar **Gradle > Refresh Gradle Project**. No es necesario cambiar manualmente los `import` de las clases Java.
 
 ---
 
@@ -285,7 +287,7 @@ Los diagramas de estas relaciones están incluidos en el UML completo; el inform
 | --- | --- |
 | GM1 — Descripción para el jugador | Objetivos, mecánicas, controles y capturas de este README |
 | GM2 — Análisis y modificaciones | Sección 2 e informe del proyecto |
-| GM3 — UML | Diagramas en `docs/uml/`, con tipos propios y de libGDX |
+| GM3 — UML | Diagrama completo editable entregado junto al informe, con tipos propios y de libGDX |
 | GM4 — Herencia e interfaces | `EntidadCayendo`, `Ataque`, `Baya` y estrategias elementales |
 | GM5 — Encapsulamiento y principios | Sección 6, código e informe |
 | GM6 — Singleton | `GestorPerfil` |
@@ -307,7 +309,7 @@ El README sirve como guía del proyecto y no sustituye el informe ni los demás 
 | No aparece la opción de importar Gradle | Revisar que Eclipse tenga Buildship; utilizar CMD mientras se configura la integración |
 | La sincronización de Gradle falla | Revisar conexión, modo sin conexión y compatibilidad de Buildship; probar el Wrapper desde CMD |
 | No encuentra texturas o sonidos al ejecutar una clase directamente | Usar `:lwjgl3:run`, que configura el directorio de recursos, o el JAR empaquetado |
-| Aparece `NoClassDefFoundError` relacionado con `DibujoPrismeon` | Usar el JAR corregido de esta entrega y no mezclar archivos de versiones anteriores |
+| Aparece `NoClassDefFoundError` relacionado con `DibujoPrismeon` | No mezclar JAR antiguos con esta versión; generar uno nuevo con `:lwjgl3:dist` |
 | Pikachu o infinito aparecen bloqueados | Completar la campaña con el perfil actual |
 | El progreso sigue apareciendo tras cambiar de carpeta el proyecto | El perfil se guarda fuera del proyecto, en la carpeta de datos del usuario |
 | No se oye audio | Revisar M y los volúmenes; el juego puede continuar si falla la inicialización del audio |

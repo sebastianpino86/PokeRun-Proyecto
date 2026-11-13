@@ -17,6 +17,7 @@ public final class PantallaMenu extends ScreenAdapter {
   private int seleccion;
   private boolean ajustes;
   private boolean infinito;
+  private boolean introduccion;
 
   public PantallaMenu(GameLluviaMenu juego) {
     this.juego=juego;this.l=juego.getLienzo();
@@ -27,6 +28,38 @@ public final class PantallaMenu extends ScreenAdapter {
     tiempo += Math.min(delta, .1f);
     GestorPerfil perfil = juego.getPerfil();
     juego.actualizarAudio(false);
+    if (introduccion) {
+      l.comenzar();
+      l.paisaje(tiempo, 1, perfil);
+      l.rect(0, 0, 960, 720, Color.BLACK, .78f);
+      l.panel(145, 125, 670, 475, Lienzo.PANEL);
+      l.centrado("LA MISIÓN", 480, 550, 33, Lienzo.MENTA, true);
+      if (!perfil.tienePikachu()) {
+        l.centrado("¡Pikachu necesita nuestra ayuda!", 480, 487, 23, Lienzo.BLANCO, true);
+        l.centrado("Prismeon lo mantiene en el Santuario Varitipo.", 480, 444, 16, Lienzo.SUAVE, false);
+        l.centrado("Cruza las tres rutas y domina tu elemento", 480, 407, 16, Lienzo.SUAVE, false);
+        l.centrado("para llegar al santuario y rescatarlo.", 480, 378, 16, Lienzo.SUAVE, false);
+      } else {
+        l.centrado("¡Pikachu está a salvo!", 480, 487, 23, Lienzo.BLANCO, true);
+        l.centrado("Ya superaste las pruebas de Prismeon.", 480, 444, 16, Lienzo.SUAVE, false);
+        l.centrado("Puedes volver a recorrer las rutas", 480, 407, 16, Lienzo.SUAVE, false);
+        l.centrado("y seguir entrenando a tu compañero.", 480, 378, 16, Lienzo.SUAVE, false);
+      }
+      l.centrado("Cada evolución te acercará a la meta.", 480, 316, 15, Lienzo.ORO, false);
+      boolean continuar = l.boton("Empezar la aventura [Enter]", 287, 174, 386, 54, true)
+          || Gdx.input.isKeyJustPressed(Input.Keys.ENTER);
+      boolean volver = l.boton("Volver [Esc]", 379, 245, 202, 42, true)
+          || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE);
+      l.terminar();
+      if (volver) introduccion = false;
+      else if (continuar) {
+        introduccion = false;
+        juego.reproducir("ui");
+        juego.cambiarPantalla(
+            new PantallaPartida(juego, Inicial.values()[seleccion], System.nanoTime(), false));
+      }
+      return;
+    }
     boolean iniciar = false;
     l.comenzar();
     l.paisaje(tiempo, 1, perfil);
@@ -123,8 +156,9 @@ public final class PantallaMenu extends ScreenAdapter {
     l.terminar();
     if (iniciar) {
       juego.reproducir("ui");
-      juego.cambiarPantalla(
-          new PantallaPartida(juego, Inicial.values()[seleccion], System.nanoTime(), infinito));
+      if (infinito) juego.cambiarPantalla(
+          new PantallaPartida(juego, Inicial.values()[seleccion], System.nanoTime(), true));
+      else introduccion = true;
     }
   }
 

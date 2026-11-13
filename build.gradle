@@ -22,7 +22,7 @@ subprojects {
     eclipse.project.name = 'GameLluviaMenu2024-' + project.name
     eclipse.classpath {
         containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
-        file.whenMerged { cp -> cp.entries.removeAll { it.kind == 'lib' || it.kind == 'var' } }
+        // Aqui arreglamos el problema de los imports en Eclipse.
     }
 }
 eclipse.project.name = 'GameLluviaMenu2024-parent'
